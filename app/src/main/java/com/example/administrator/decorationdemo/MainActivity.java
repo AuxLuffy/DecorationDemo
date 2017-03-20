@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setFullDisp();
+//        setFullDisp();
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);//这个必须在setContentView之前调用
         setContentView(R.layout.activity_main);
         hideActionBar();
@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
-
             //方法二：使用activity可见的view设置
             //一旦UI Flag被清除（比如跳转到另外的activity），你需要重新设置UI flag来隐藏system bar。
             View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;//api16以后
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;//api16以后
             decorView.setSystemUiVisibility(uiOptions);
             // Remember that you should never show the action bar if the
             // status bar is hidden, so hide that too if necessary.
+
             hideActionBar();
 
         }
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 break;
             case R.id.btn:
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 break;
         }
     }
